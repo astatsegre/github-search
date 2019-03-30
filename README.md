@@ -1,5 +1,4 @@
 # GithubSearch
 
 To run locally:
-`npm instal`
-`npm start`
+`npm instal` and `npm start`
