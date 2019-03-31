@@ -7,8 +7,10 @@ input {
   margin-bottom: 20px;
 }
 
-input:hover {
+input:hover,
+input:focus {
   border-color: lightskyblue;
+  outline: none;
 }
 
 .result-item {

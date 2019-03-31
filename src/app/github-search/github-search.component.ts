@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {GithubService} from '../github.service';
 import {FormControl} from '@angular/forms';
 import {debounceTime, filter, switchMap} from 'rxjs/operators';
@@ -34,14 +34,16 @@ export class GithubSearchComponent implements OnInit, OnDestroy {
           this.results = [];
           this.noMatches = false;
           this.error = null;
+          this.isLoading = false;
         }),
         switchMap((val: string) => {
-          this.isLoading = true;
           this.results = [];
           this.noMatches = false;
+          this.isLoading = true;
           return this.githubService.getReposList(val);
         }))
       .subscribe((resp: HandledResponse) => {
+        if (!this.isLoading) return;
         this.results = resp.items;
         this.noMatches = resp.items.length === 0;
         this.error = resp.error;
